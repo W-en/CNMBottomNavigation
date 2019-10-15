@@ -18,6 +18,15 @@ dependencies {
 	implementation 'com.github.W-en:CNMBottomNavigation:Tag'
 }
 ```
+### Xml
+```
+	<com.cnm.bottomnavigation.CNMBottomNavigation
+      	    android:id="@+id/cnm"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+```
+### 代码
 ```
         cnm = findViewById(R.id.cnm);
 
@@ -34,6 +43,8 @@ dependencies {
            .setScaleSize(1.3f) 				// 缩放模式下，缩放大小
            .setActiveColor(Color.RED) 			// 选中颜色 默认主题颜色
            .setInactiveColor(Color.GRAY) 		// 未选中颜色 默认gray
+	   .setTitleSize(28) 				// 文字大小 // 默认 12sp
+           .setIconWidthHeight(50, 50) 			// icon宽高 默认 24dp
            .setOnSelectedListener(new CNMBottomNavigation.OnSelectedListener() {
                     @Override
                     public void onSelectedListener(int position) {
