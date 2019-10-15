@@ -1,3 +1,4 @@
+![logo](https://github.com/W-en/CNMBottomNavigation/raw/master/Assets/Image/xiaoguotu.png)
 # CNMBottomNavigation
 [![](https://www.jitpack.io/v/W-en/CNMBottomNavigation.svg)](https://www.jitpack.io/#W-en/CNMBottomNavigation)
 ### Step 1. Add the JitPack repository to your build file
