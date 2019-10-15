@@ -33,19 +33,29 @@ public class CNMBottomNavigation extends HorizontalScrollView {
     String TAG = getClass().getSimpleName();
 
     private int mElevation;
+    private int mItemDrawableRes;
+
+    // 当前选中item未知
     private int mCurrentItem;
+
+    // 图片和文字之间距离，图片与父布局top距离，文字与父布局bottom距离
     private int mCenterOffset;
-    private int mTextSize;
     private int mMarginTop;
     private int mMarginBottom;
 
+    // 文字大小，图片宽高
+    private int mTitleSize;
+    private int mIconWidth;
+    private int mIconHeight;
+
+    // 选中颜色，未选中颜色
     private int mActiveColor;
     private int mInactiveColor;
 
+    // 缩放状态下，缩放值
     private float mScaleSize = 1.2f;
 
     private Context mContext;
-    private int mItemDrawableRes;
     private ArrayList<CNMBottomNavigationItem> mItems = new ArrayList<>();
     private ArrayList<View> mImageViews = new ArrayList<>();
     private ArrayList<View> mTextViews = new ArrayList<>();
@@ -101,7 +111,9 @@ public class CNMBottomNavigation extends HorizontalScrollView {
         mCenterOffset = dpToPx(4);
         mMarginTop = dpToPx(4);
         mMarginBottom = dpToPx(4);
-        mTextSize = sp2px(14);
+        mTitleSize = sp2px(12);
+        mIconWidth = dpToPx(24);
+        mIconHeight = dpToPx(24);
         mActiveColor = getColorPrimary();
         mInactiveColor = Color.GRAY;
 
@@ -289,9 +301,11 @@ public class CNMBottomNavigation extends HorizontalScrollView {
      */
     private ImageView createImageView() {
         ImageView imageView = new ImageView(mContext);
-        imageView.setScaleType(ImageView.ScaleType.CENTER);
+        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         MarginLayoutParams params = new MarginLayoutParams(MarginLayoutParams.WRAP_CONTENT, MarginLayoutParams.WRAP_CONTENT);
         params.setMargins(0, mMarginTop, 0, mCenterOffset / 2);
+        params.width = mIconWidth;
+        params.height = mIconHeight;
         imageView.setLayoutParams(params);
         return imageView;
     }
@@ -304,7 +318,7 @@ public class CNMBottomNavigation extends HorizontalScrollView {
     private TextView createTextView() {
         TextView textView = new TextView(mContext);
         textView.setGravity(Gravity.CENTER);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextSize);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTitleSize);
         textView.setTextColor(mInactiveColor);
         // 去除默认padding
         textView.setIncludeFontPadding(false);
@@ -540,7 +554,6 @@ public class CNMBottomNavigation extends HorizontalScrollView {
 
     /**
      *  设置item drawable
-     * @param @DrawableRes int drawable
      * @return {@link CNMBottomNavigation}
      */
     public CNMBottomNavigation setItemDrawable(@DrawableRes int drawableRes){
@@ -549,13 +562,37 @@ public class CNMBottomNavigation extends HorizontalScrollView {
         return this;
     }
 
+    /**
+     *  设置title文字大小 默认12sp
+     * @param size 大小
+     * @return {@link CNMBottomNavigation}
+     */
+    public CNMBottomNavigation setTitleSize(int size){
+        this.mTitleSize = size;
+        createItems();
+        return this;
+    }
+
+    /**
+     *  设置icon宽高 默认24dp
+     * @param width 宽度
+     * @param height 高度
+     * @return {@link CNMBottomNavigation}
+     */
+    public CNMBottomNavigation setIconWidthHeight(int width, int height){
+        this.mIconWidth = width;
+        this.mIconHeight = height;
+        createItems();
+        return this;
+    }
+
     //***************************************************************************************************************
 
     //===============================================================================================================
 
-    public final float DENSITY = Resources.getSystem().getDisplayMetrics().density;
+    private final float DENSITY = Resources.getSystem().getDisplayMetrics().density;
 
-    public float getFontDensity() {
+    private float getFontDensity() {
         return mContext.getResources().getDisplayMetrics().scaledDensity;
     }
 
@@ -565,7 +602,7 @@ public class CNMBottomNavigation extends HorizontalScrollView {
      * @param dpValue 以 dp 为单位的值
      * @return px value
      */
-    public int dpToPx(int dpValue) {
+    private int dpToPx(int dpValue) {
         return (int) (dpValue * DENSITY + 0.5f);
     }
 
@@ -575,7 +612,7 @@ public class CNMBottomNavigation extends HorizontalScrollView {
      * @param sp 以 px 为单位的值
      * @return px值
      */
-    public int sp2px(int sp) {
+    private int sp2px(int sp) {
         return (int) (getFontDensity() * sp + 0.5);
     }
 

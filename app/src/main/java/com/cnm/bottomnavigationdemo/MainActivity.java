@@ -27,34 +27,37 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         ((CheckBox) findViewById(R.id.activeColor)).setOnCheckedChangeListener(this);
         ((CheckBox) findViewById(R.id.inactiveColor)).setOnCheckedChangeListener(this);
 
-        cnm = findViewById(R.id.cnm);
+            cnm = findViewById(R.id.cnm);
 
-        cnm.addItem(new CNMBottomNavigationItem("Item 1", R.mipmap.settings_selected, R.mipmap.settings_unselected))
-                .addItem(new CNMBottomNavigationItem("Item 1", R.mipmap.settings_selected, R.mipmap.settings_unselected))
-                .addItem(new CNMBottomNavigationItem("Item 1", R.mipmap.settings_selected, R.mipmap.settings_unselected))
-                .setState(CNMBottomNavigation.State.SCALE)
-                .setMode(CNMBottomNavigation.Mode.FIXED)
-                .setCenterOffset(20)
-                .setMarginTop(20)
-                .setMarginBottom(20)
-                .setItemDrawable(R.drawable.item_bg)
-                .setScaleSize(1.3f)
-                .setActiveColor(Color.RED)
-                .setInactiveColor(Color.GRAY)
+            cnm.addItem(new CNMBottomNavigationItem("Item 1", R.mipmap.settings_selected/*, R.mipmap.settings_unselected*/))
+                .addItem(new CNMBottomNavigationItem("Item 2", R.mipmap.settings_selected/*, R.mipmap.settings_unselected*/))
+                .addItem(new CNMBottomNavigationItem("Item 3", R.mipmap.settings_selected/*, R.mipmap.settings_unselected*/))
+//              .addItem(new CNMBottomNavigationItem("Item", R.mipmap.settings_selected)) // 如果你的icon是透明的，可以只传一张图片
+                .setState(CNMBottomNavigation.State.NORMAL)  // state 默认normal
+                .setMode(CNMBottomNavigation.Mode.FIXED) // mode 默认fixed
+                .setCenterOffset(10) // imageview 和 textview 之间的距离 默认 4dp
+                .setMarginTop(10) // imageview top 与父布局距离 默认 4dp
+                .setMarginBottom(10) // textview bottom 与父布局距离 默认 4dp
+//                .setItemDrawable(R.drawable.item_bg) // 设置item drawable 5.0以上默认有水波纹效果
+                .setScaleSize(1.3f) // 缩放模式下，缩放大小 默认1.2f
+                .setActiveColor(Color.RED) // 选中颜色 默认主题颜色
+                .setInactiveColor(Color.GRAY) // 未选中颜色 默认gray
+                 .setTitleSize(28) // 文字大小 // 默认 12sp
+                 .setIconWidthHeight(50, 50) // icon宽高 默认 24dp
                 .setOnSelectedListener(new CNMBottomNavigation.OnSelectedListener() {
                     @Override
                     public void onSelectedListener(int position) {
-
+                        // 点击事件
                     }
                 })
-                .setCurrentItem(3);
+                .setCurrentItem(3); // 设置当前选中的item
     }
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         switch (buttonView.getId()) {
             case R.id.addItem:
-                cnm.addItem(new CNMBottomNavigationItem("Item 1", (R.mipmap.settings_selected), (R.mipmap.settings_unselected)));
+                cnm.addItem(new CNMBottomNavigationItem("Item 1", R.mipmap.settings_selected));
                 break;
             case R.id.state:
                 cnm.setState(isChecked ? CNMBottomNavigation.State.NORMAL : CNMBottomNavigation.State.SCALE);
