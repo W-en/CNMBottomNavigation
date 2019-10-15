@@ -1,0 +1,2 @@
+include ':app', ':cnmbottomnavigation'
+rootProject.name='CNMBottomNavigation'
