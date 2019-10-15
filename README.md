@@ -1,6 +1,8 @@
 ![logo](https://raw.githubusercontent.com/W-en/CNMBottomNavigation/master/images/logo.png)
 # CNMBottomNavigation
 [![](https://www.jitpack.io/v/W-en/CNMBottomNavigation.svg)](https://www.jitpack.io/#W-en/CNMBottomNavigation)
+### 效果Gif:
+![gif](https://raw.githubusercontent.com/W-en/CNMBottomNavigation/master/images/cnm.gif)
 ### Step 1. Add the JitPack repository to your build file
 ```
 allprojects {
